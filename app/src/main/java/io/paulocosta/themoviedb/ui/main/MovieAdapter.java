@@ -6,15 +6,15 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.databinding.ItemMovieViewBinding;
 import io.paulocosta.themoviedb.ui.base.BaseViewHolder;
 
 public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private List<MovieResponse> movieList;
+    private List<Movie> movieList;
 
-    public MovieAdapter(List<MovieResponse> movieList) {
+    public MovieAdapter(List<Movie> movieList) {
         this.movieList = movieList;
     }
 
@@ -31,7 +31,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         movieList.clear();
     }
 
-    public void addItems(List<MovieResponse> movieList) {
+    public void addItems(List<Movie> movieList) {
         this.movieList.addAll(movieList);
         notifyDataSetChanged();
     }
@@ -60,7 +60,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
 
-            final MovieResponse movie = movieList.get(position);
+            final Movie movie = movieList.get(position);
 
             movieItemViewModel = new MovieItemViewModel(movie);
 

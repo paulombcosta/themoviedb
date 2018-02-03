@@ -19,7 +19,7 @@ import io.paulocosta.themoviedb.data.remote.ApiHelper;
 import io.paulocosta.themoviedb.data.remote.AppApiHelper;
 import io.paulocosta.themoviedb.data.remote.AuthInterceptor;
 import io.paulocosta.themoviedb.data.remote.Endpoint;
-import io.paulocosta.themoviedb.data.remote.MoviesService;
+import io.paulocosta.themoviedb.data.remote.UpcomingService;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -56,8 +56,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    MoviesService provideMoviesService(final Retrofit retrofit) {
-        return retrofit.create(MoviesService.class);
+    UpcomingService provideMoviesService(final Retrofit retrofit) {
+        return retrofit.create(UpcomingService.class);
     }
 
     @Provides

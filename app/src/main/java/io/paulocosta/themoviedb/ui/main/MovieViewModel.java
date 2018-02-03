@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.paulocosta.themoviedb.data.DataManager;
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.ui.base.BaseViewModel;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by paulocosta on 02/02/18.
@@ -16,25 +18,44 @@ import io.paulocosta.themoviedb.ui.base.BaseViewModel;
 
 public class MovieViewModel extends BaseViewModel {
 
-    private final ObservableArrayList<MovieResponse> moviesObservableArrayList = new ObservableArrayList<>();
+    private final ObservableArrayList<Movie> moviesObservableArrayList = new ObservableArrayList<>();
 
-    private final MutableLiveData<List<MovieResponse>> movieListLiveData;
+    private final MutableLiveData<List<Movie>> movieListLiveData;
+
+    private final MutableLiveData<Integer> currentPage;
 
     public MovieViewModel(DataManager dataManager) {
         super(dataManager);
         movieListLiveData = new MutableLiveData<>();
+        currentPage = new MutableLiveData<>();
+        currentPage.setValue(1);
         fetchMovies();
     }
 
     public void fetchMovies() {
-        movieListLiveData.setValue(fakeData());
+        //movieListLiveData.setValue(fakeData());
+        test();
     }
 
-    public List<MovieResponse> fakeData() {
-        List<MovieResponse> movies = new ArrayList<>();
-        MovieResponse fake1 = new MovieResponse();
+    public void test() {
+        getDataManager().getUpcomingMovies()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        response -> {
+                            if (response != null) {
+                                movieListLiveData.setValue(response.getResults());
+                            }
+                        },
+                        e -> {
+                        });
+    }
+
+    public List<Movie> fakeData() {
+        List<Movie> movies = new ArrayList<>();
+        Movie fake1 = new Movie();
         fake1.setOriginalTitle("Fake movie 1");
-        MovieResponse fake2 = new MovieResponse();
+        Movie fake2 = new Movie();
         fake2.setOriginalTitle("Fake movie 2");
 
         movies.add(fake1);
@@ -43,16 +64,16 @@ public class MovieViewModel extends BaseViewModel {
         return movies;
     }
 
-    public MutableLiveData<List<MovieResponse>> getMovieListLiveData() {
+    public MutableLiveData<List<Movie>> getMovieListLiveData() {
         return movieListLiveData;
     }
 
-    public void addMovieItemToList(List<MovieResponse> movies) {
+    public void addMovieItemToList(List<Movie> movies) {
         moviesObservableArrayList.clear();
         moviesObservableArrayList.addAll(movies);
     }
 
-    public ObservableArrayList<MovieResponse> getMoviesObservableArrayList() {
+    public ObservableArrayList<Movie> getMoviesObservableArrayList() {
         return moviesObservableArrayList;
     }
 

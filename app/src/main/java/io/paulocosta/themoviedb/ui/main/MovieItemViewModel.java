@@ -2,7 +2,7 @@ package io.paulocosta.themoviedb.ui.main;
 
 import android.databinding.ObservableField;
 
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
 
 /**
  * Created by paulocosta on 02/02/18.
@@ -10,13 +10,21 @@ import io.paulocosta.themoviedb.data.model.api.MovieResponse;
 
 public class MovieItemViewModel {
 
-    private MovieResponse movieResponse;
+    private Movie movie;
 
     public ObservableField<String> originalTitle;
+    public ObservableField<String> overview;
+    public ObservableField<String> posterPath;
 
-    public MovieItemViewModel(MovieResponse movieResponse) {
-        this.movieResponse = movieResponse;
-        this.originalTitle = new ObservableField<>(movieResponse.getOriginalTitle());
+    public MovieItemViewModel(Movie movie) {
+        this.movie = movie;
+        this.originalTitle = new ObservableField<>(movie.getOriginalTitle());
+        this.overview = new ObservableField<>(movie.getOverview());
+        this.posterPath = new ObservableField<>(movie.getPosterPath());
+    }
+
+    public interface MovieItemClickListener {
+        void onClick(Movie movie);
     }
 
 }

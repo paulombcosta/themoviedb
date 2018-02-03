@@ -2,7 +2,6 @@ package io.paulocosta.themoviedb.ui.main;
 
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +12,7 @@ import javax.inject.Inject;
 
 import io.paulocosta.themoviedb.BR;
 import io.paulocosta.themoviedb.R;
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.databinding.ActivityMovieBinding;
 import io.paulocosta.themoviedb.ui.base.BaseActivity;
 
@@ -52,9 +51,9 @@ public class MovieActivity extends BaseActivity<ActivityMovieBinding, MovieViewM
     }
 
     private void subscribeToLiveData() {
-        viewModel.getMovieListLiveData().observe(this, new Observer<List<MovieResponse>>() {
+        viewModel.getMovieListLiveData().observe(this, new Observer<List<Movie>>() {
             @Override
-            public void onChanged(@Nullable List<MovieResponse> movieResponses) {
+            public void onChanged(@Nullable List<Movie> movieResponses) {
                 viewModel.addMovieItemToList(movieResponses);
             }
         });

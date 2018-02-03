@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import io.paulocosta.themoviedb.data.DataManager;
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
 
 /**
  * Created by paulocosta on 02/02/18.
@@ -23,7 +23,7 @@ public class MovieActivityModule {
 
     @Provides
     MovieAdapter provideMovieAdapter() {
-        return new MovieAdapter(new ArrayList<MovieResponse>());
+        return new MovieAdapter(new ArrayList<Movie>());
     }
 
     @Provides

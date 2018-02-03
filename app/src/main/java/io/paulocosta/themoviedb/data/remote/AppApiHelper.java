@@ -1,10 +1,8 @@
 package io.paulocosta.themoviedb.data.remote;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.api.UpcomingResponse;
 import io.reactivex.Single;
 
 /**
@@ -13,16 +11,15 @@ import io.reactivex.Single;
 
 public class AppApiHelper implements ApiHelper {
 
-    private final MoviesService moviesService;
+    private final UpcomingService upcomingService;
 
     @Inject
-    public AppApiHelper(final MoviesService moviesService) {
-        this.moviesService = moviesService;
+    public AppApiHelper(final UpcomingService upcomingService) {
+        this.upcomingService = upcomingService;
     }
 
     @Override
-    public Single<List<MovieResponse>> getMovies() {
-        return null;
+    public Single<UpcomingResponse> getUpcomingMovies() {
+        return upcomingService.getUpcomingMovies(1);
     }
-
 }

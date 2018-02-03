@@ -1,5 +1,8 @@
 package io.paulocosta.themoviedb.data;
 
 
-public interface DataManager {
+import io.paulocosta.themoviedb.data.remote.ApiHelper;
+
+public interface DataManager extends ApiHelper {
+
 }

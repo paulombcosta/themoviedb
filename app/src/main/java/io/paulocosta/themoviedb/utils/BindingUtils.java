@@ -25,7 +25,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import io.paulocosta.themoviedb.data.model.api.MovieResponse;
+import io.paulocosta.themoviedb.data.model.db.Movie;
+import io.paulocosta.themoviedb.data.remote.ImageUrlFormatter;
 import io.paulocosta.themoviedb.ui.main.MovieAdapter;
 
 public final class BindingUtils {
@@ -36,11 +37,28 @@ public final class BindingUtils {
 
     @BindingAdapter({"adapter"})
     public static void addMovieItems(RecyclerView recyclerView,
-                                  ArrayList<MovieResponse> movies) {
+                                  ArrayList<Movie> movies) {
         MovieAdapter adapter = (MovieAdapter) recyclerView.getAdapter();
         if(adapter != null) {
             adapter.clearItems();
             adapter.addItems(movies);
         }
     }
+
+    @BindingAdapter({"imageUrlSm"})
+    public static void setImageUrlSm(ImageView imageView, String path) {
+        Context context = imageView.getContext();
+        Glide.with(context)
+                .load(ImageUrlFormatter.getSmallImagePath(path))
+                .into(imageView);
+    }
+
+    @BindingAdapter({"imageUrlLg"})
+    public static void setImageUrlLg(ImageView imageView, String path) {
+        Context context = imageView.getContext();
+        Glide.with(context)
+                .load(ImageUrlFormatter.getLargeImagePath(path))
+                .into(imageView);
+    }
+
 }
