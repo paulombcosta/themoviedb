@@ -19,7 +19,7 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<UpcomingResponse> getUpcomingMovies() {
-        return upcomingService.getUpcomingMovies(1);
+    public Single<UpcomingResponse> getUpcomingMovies(int page) {
+        return upcomingService.getUpcomingMovies(page);
     }
 }

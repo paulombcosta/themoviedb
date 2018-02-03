@@ -46,17 +46,13 @@ public class MovieActivity extends BaseActivity<ActivityMovieBinding, MovieViewM
     private void setUp() {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.movieRecyclerView.setLayoutManager(layoutManager);
-        binding.movieRecyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.movieRecyclerView.setAdapter(movieAdapter);
+        binding.movieRecyclerView.setupMoreListener(viewModel.getOnMoreLister(), 5);
     }
 
     private void subscribeToLiveData() {
-        viewModel.getMovieListLiveData().observe(this, new Observer<List<Movie>>() {
-            @Override
-            public void onChanged(@Nullable List<Movie> movieResponses) {
-                viewModel.addMovieItemToList(movieResponses);
-            }
-        });
+        viewModel.getMovieListLiveData().observe(this,
+                movies -> viewModel.addMovieItemToList(movies));
     }
 
     @Override

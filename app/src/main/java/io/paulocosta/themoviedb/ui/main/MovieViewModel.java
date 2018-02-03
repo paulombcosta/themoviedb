@@ -3,6 +3,8 @@ package io.paulocosta.themoviedb.ui.main;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
 
+import com.malinskiy.superrecyclerview.OnMoreListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,19 +34,26 @@ public class MovieViewModel extends BaseViewModel {
         fetchMovies();
     }
 
-    public void fetchMovies() {
-        //movieListLiveData.setValue(fakeData());
-        test();
+    public OnMoreListener getOnMoreLister() {
+        return (overallItemsCount, itemsBeforeMore, maxLastVisiblePosition) -> {
+            currentPage.setValue(currentPage.getValue() + 1);
+            fetchMovies();
+        };
     }
 
-    public void test() {
-        getDataManager().getUpcomingMovies()
+    public void fetchMovies() {
+        getDataManager().getUpcomingMovies(currentPage.getValue())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         response -> {
                             if (response != null) {
-                                movieListLiveData.setValue(response.getResults());
+                                List<Movie> currentMovies = movieListLiveData.getValue();
+                                if (currentMovies == null) {
+                                    currentMovies = new ArrayList<>();
+                                }
+                                currentMovies.addAll(response.getResults());
+                                movieListLiveData.setValue(currentMovies);
                             }
                         },
                         e -> {

@@ -20,7 +20,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<UpcomingResponse> getUpcomingMovies() {
-        return apiHelper.getUpcomingMovies();
+    public Single<UpcomingResponse> getUpcomingMovies(int page) {
+        return apiHelper.getUpcomingMovies(page);
     }
 }

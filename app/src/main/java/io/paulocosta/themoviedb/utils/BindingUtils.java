@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.malinskiy.superrecyclerview.SuperRecyclerView;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public final class BindingUtils {
     }
 
     @BindingAdapter({"adapter"})
-    public static void addMovieItems(RecyclerView recyclerView,
+    public static void addMovieItems(SuperRecyclerView recyclerView,
                                   ArrayList<Movie> movies) {
         MovieAdapter adapter = (MovieAdapter) recyclerView.getAdapter();
         if(adapter != null) {

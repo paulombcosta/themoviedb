@@ -9,6 +9,6 @@ import io.reactivex.Single;
 
 public interface ApiHelper {
 
-    Single<UpcomingResponse> getUpcomingMovies();
+    Single<UpcomingResponse> getUpcomingMovies(int page);
 
 }
