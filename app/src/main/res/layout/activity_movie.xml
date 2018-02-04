@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="io.paulocosta.themoviedb.ui.main.MovieViewModel" />
+            type="io.paulocosta.themoviedb.ui.movie.MovieViewModel" />
 
     </data>
 

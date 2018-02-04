@@ -1,5 +1,6 @@
-package io.paulocosta.themoviedb.ui.main;
+package io.paulocosta.themoviedb.ui.movie;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import java.util.List;
 import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.databinding.ItemMovieViewBinding;
 import io.paulocosta.themoviedb.ui.base.BaseViewHolder;
+import io.paulocosta.themoviedb.ui.movie.detail.MovieDetailActivity;
 
 public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -46,7 +48,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return movieList.size();
     }
 
-    public class MoviesViewHolder extends BaseViewHolder {
+    public class MoviesViewHolder extends BaseViewHolder implements MovieItemViewModel.MovieItemClickListener {
 
         private ItemMovieViewBinding binding;
 
@@ -62,12 +64,18 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             final Movie movie = movieList.get(position);
 
-            movieItemViewModel = new MovieItemViewModel(movie);
+            movieItemViewModel = new MovieItemViewModel(movie, this);
 
             binding.setViewModel(movieItemViewModel);
 
             binding.executePendingBindings();
 
+        }
+
+        @Override
+        public void onClick(Movie movie) {
+            Intent intent = new Intent(itemView.getContext(), MovieDetailActivity.class);
+            itemView.getContext().startActivity(intent);
         }
 
     }

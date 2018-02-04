@@ -18,7 +18,6 @@ package io.paulocosta.themoviedb.utils;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 
 import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.data.remote.ImageUrlFormatter;
-import io.paulocosta.themoviedb.ui.main.MovieAdapter;
+import io.paulocosta.themoviedb.ui.movie.MovieAdapter;
 
 public final class BindingUtils {
 

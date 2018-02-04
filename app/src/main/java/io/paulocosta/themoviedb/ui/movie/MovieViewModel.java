@@ -1,4 +1,4 @@
-package io.paulocosta.themoviedb.ui.main;
+package io.paulocosta.themoviedb.ui.movie;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by paulocosta on 02/02/18.
  */
 
-public class MovieViewModel extends BaseViewModel {
+public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
     private final ObservableArrayList<Movie> moviesObservableArrayList = new ObservableArrayList<>();
 

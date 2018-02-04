@@ -1,4 +1,4 @@
-package io.paulocosta.themoviedb.ui.main;
+package io.paulocosta.themoviedb.ui.movie;
 
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -17,7 +17,7 @@ import io.paulocosta.themoviedb.data.model.db.Movie;
 public class MovieActivityModule {
 
     @Provides
-    MovieViewModel provideMainViewModel(DataManager dataManager) {
+    MovieViewModel provideMovieViewModel(DataManager dataManager) {
         return new MovieViewModel(dataManager);
     }
 

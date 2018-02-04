@@ -1,4 +1,4 @@
-package io.paulocosta.themoviedb.ui.main;
+package io.paulocosta.themoviedb.ui.movie;
 
 import android.databinding.ObservableField;
 
@@ -16,15 +16,22 @@ public class MovieItemViewModel {
     public ObservableField<String> overview;
     public ObservableField<String> posterPath;
 
-    public MovieItemViewModel(Movie movie) {
+    public MovieItemClickListener listener;
+
+    public MovieItemViewModel(Movie movie, MovieItemClickListener listener) {
         this.movie = movie;
         this.originalTitle = new ObservableField<>(movie.getOriginalTitle());
         this.overview = new ObservableField<>(movie.getOverview());
         this.posterPath = new ObservableField<>(movie.getPosterPath());
+        this.listener = listener;
     }
 
     public interface MovieItemClickListener {
         void onClick(Movie movie);
+    }
+
+    public void onItemClick() {
+        listener.onClick(movie);
     }
 
 }

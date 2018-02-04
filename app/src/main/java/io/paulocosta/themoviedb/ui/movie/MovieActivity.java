@@ -1,18 +1,12 @@
-package io.paulocosta.themoviedb.ui.main;
+package io.paulocosta.themoviedb.ui.movie;
 
-import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import io.paulocosta.themoviedb.BR;
 import io.paulocosta.themoviedb.R;
-import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.databinding.ActivityMovieBinding;
 import io.paulocosta.themoviedb.ui.base.BaseActivity;
 
