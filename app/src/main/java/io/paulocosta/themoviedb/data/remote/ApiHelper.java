@@ -1,6 +1,6 @@
 package io.paulocosta.themoviedb.data.remote;
 
-import io.paulocosta.themoviedb.data.model.api.UpcomingResponse;
+import io.paulocosta.themoviedb.data.model.api.ApiResponse;
 import io.reactivex.Single;
 
 /**
@@ -9,6 +9,6 @@ import io.reactivex.Single;
 
 public interface ApiHelper {
 
-    Single<UpcomingResponse> getUpcomingMovies(int page);
+    Single<ApiResponse> getUpcomingMovies(int page);
 
 }

@@ -2,7 +2,7 @@ package io.paulocosta.themoviedb.data.remote;
 
 import javax.inject.Inject;
 
-import io.paulocosta.themoviedb.data.model.api.UpcomingResponse;
+import io.paulocosta.themoviedb.data.model.api.ApiResponse;
 import io.reactivex.Single;
 
 /**
@@ -19,7 +19,7 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<UpcomingResponse> getUpcomingMovies(int page) {
+    public Single<ApiResponse> getUpcomingMovies(int page) {
         return upcomingService.getUpcomingMovies(page);
     }
 }

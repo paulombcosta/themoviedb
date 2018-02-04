@@ -1,6 +1,7 @@
 package io.paulocosta.themoviedb.ui.movie;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -75,6 +76,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onClick(Movie movie) {
             Intent intent = new Intent(itemView.getContext(), MovieDetailActivity.class);
+            intent.putExtra("movie", (Parcelable) movie);
             itemView.getContext().startActivity(intent);
         }
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 import io.paulocosta.themoviedb.data.model.db.Movie;
 
-public class UpcomingResponse implements Serializable {
+public class ApiResponse implements Serializable {
 
    private Integer page;
 

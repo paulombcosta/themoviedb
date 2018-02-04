@@ -3,6 +3,8 @@ package io.paulocosta.themoviedb.data.model.db;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +12,16 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Movie implements Serializable {
+public class Movie implements Serializable, Parcelable {
+
+    public Movie() {}
+
+    public Movie(Parcel in) {
+        originalTitle = in.readString();
+        posterPath = in.readString();
+        overview = in.readString();
+        releaseDate = in.readString();
+    }
 
     @SerializedName("id")
     @PrimaryKey
@@ -167,4 +178,30 @@ public class Movie implements Serializable {
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(originalTitle);
+        parcel.writeString(posterPath);
+        parcel.writeString(overview);
+        parcel.writeString(releaseDate);
+    }
+
+    public static final Parcelable.Creator<Movie> CREATOR = new Parcelable.Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel parcel) {
+            return new Movie(parcel);
+        }
+
+        @Override
+        public Movie[] newArray(int i) {
+            return new Movie[i];
+        }
+    };
+
 }

@@ -14,9 +14,6 @@ import io.paulocosta.themoviedb.ui.base.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by paulocosta on 02/02/18.
- */
 
 public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
@@ -58,19 +55,6 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
                         },
                         e -> {
                         });
-    }
-
-    public List<Movie> fakeData() {
-        List<Movie> movies = new ArrayList<>();
-        Movie fake1 = new Movie();
-        fake1.setOriginalTitle("Fake movie 1");
-        Movie fake2 = new Movie();
-        fake2.setOriginalTitle("Fake movie 2");
-
-        movies.add(fake1);
-        movies.add(fake2);
-
-        return movies;
     }
 
     public MutableLiveData<List<Movie>> getMovieListLiveData() {

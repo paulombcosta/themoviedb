@@ -4,10 +4,6 @@ import android.databinding.ObservableField;
 
 import io.paulocosta.themoviedb.data.model.db.Movie;
 
-/**
- * Created by paulocosta on 02/02/18.
- */
-
 public class MovieItemViewModel {
 
     private Movie movie;
@@ -15,6 +11,7 @@ public class MovieItemViewModel {
     public ObservableField<String> originalTitle;
     public ObservableField<String> overview;
     public ObservableField<String> posterPath;
+    public ObservableField<String> releaseDate;
 
     public MovieItemClickListener listener;
 
@@ -23,6 +20,7 @@ public class MovieItemViewModel {
         this.originalTitle = new ObservableField<>(movie.getOriginalTitle());
         this.overview = new ObservableField<>(movie.getOverview());
         this.posterPath = new ObservableField<>(movie.getPosterPath());
+        this.releaseDate = new ObservableField<>(movie.getReleaseDate());
         this.listener = listener;
     }
 

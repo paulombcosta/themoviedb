@@ -3,7 +3,7 @@ package io.paulocosta.themoviedb.data;
 import javax.inject.Inject;
 
 import io.paulocosta.themoviedb.data.local.DbHelper;
-import io.paulocosta.themoviedb.data.model.api.UpcomingResponse;
+import io.paulocosta.themoviedb.data.model.api.ApiResponse;
 import io.paulocosta.themoviedb.data.remote.ApiHelper;
 import io.reactivex.Single;
 
@@ -20,7 +20,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<UpcomingResponse> getUpcomingMovies(int page) {
+    public Single<ApiResponse> getUpcomingMovies(int page) {
         return apiHelper.getUpcomingMovies(page);
     }
 }

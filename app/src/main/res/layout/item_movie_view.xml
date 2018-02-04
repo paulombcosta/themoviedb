@@ -43,6 +43,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
+                android:paddingLeft="@dimen/card_view_text_padding"
+                android:paddingRight="@dimen/card_view_text_padding"
+                android:paddingBottom="@dimen/card_view_text_padding"
+                android:paddingTop="@dimen/card_view_text_padding_top"
                 >
 
                 <TextView
@@ -60,6 +64,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:layout_below="@id/movie_title" />
+
+                <TextView
+                    android:layout_toRightOf="@id/movie_title"
+                    android:gravity="right"
+                    android:text="@{viewModel.releaseDate}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    />
 
             </RelativeLayout>
 

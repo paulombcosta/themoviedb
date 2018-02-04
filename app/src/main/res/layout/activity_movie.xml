@@ -13,23 +13,42 @@
 
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <com.malinskiy.superrecyclerview.SuperRecyclerView
-            android:id="@+id/movieRecyclerView"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_movie_view"
-            app:adapter="@{viewModel.moviesObservableArrayList}"
-            >
-            <!--app:adapter="@{viewModel.moviesObservableArrayList}"-->
+            android:layout_height="wrap_content">
 
-        </com.malinskiy.superrecyclerview.SuperRecyclerView>
+            <android.support.v7.widget.Toolbar
+                app:title="@string/app_name"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary" />
 
-    </LinearLayout>
+        </android.support.design.widget.AppBarLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.malinskiy.superrecyclerview.SuperRecyclerView
+                android:id="@+id/movieRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_movie_view"
+                app:recyclerPadding="16dp"
+                app:adapter="@{viewModel.moviesObservableArrayList}"
+                >
+
+            </com.malinskiy.superrecyclerview.SuperRecyclerView>
+
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </layout>

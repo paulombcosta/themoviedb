@@ -19,17 +19,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Module
 public class MovieDetailModule {
 
-//    @Qualifier
-//    @Documented
-//    @Retention(RUNTIME)
-//    @interface MovieExtra {}
-//
-//    @MovieExtra
-//    Movie getMovie() {
-//        return getIn
-//    }
-
-
     @Provides
     MovieDetailViewModel provideViewModel(DataManager dataManager) {
         return new MovieDetailViewModel(dataManager);
