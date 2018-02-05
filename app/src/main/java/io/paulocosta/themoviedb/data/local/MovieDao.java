@@ -9,9 +9,6 @@ import java.util.List;
 
 import io.paulocosta.themoviedb.data.model.db.Movie;
 
-/**
- * Created by paulocosta on 01/02/18.
- */
 
 @Dao
 public interface MovieDao {
@@ -19,7 +16,7 @@ public interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Movie> genres);
 
-    @Query("SELECT * FROM MOVIES")
+    @Query("SELECT * FROM MOVIES ORDER BY release_date ASC")
     List<Movie> getAllMovies();
 
 }

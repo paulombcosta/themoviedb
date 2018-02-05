@@ -1,5 +1,6 @@
 package io.paulocosta.themoviedb.data.model.db;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
@@ -29,6 +30,7 @@ public class Movie implements Serializable, Parcelable {
     private Integer id;
 
     @SerializedName("poster_path")
+    @ColumnInfo(name = "poster_path")
     private String posterPath;
 
     @SerializedName("adult")
@@ -38,6 +40,7 @@ public class Movie implements Serializable, Parcelable {
     private String overview;
 
     @SerializedName("release_date")
+    @ColumnInfo(name = "release_date")
     private String releaseDate;
 
     @SerializedName("genre_ids")
@@ -45,27 +48,32 @@ public class Movie implements Serializable, Parcelable {
     private List<Integer> genreIds;
 
     @SerializedName("original_title")
+    @ColumnInfo(name = "original_title")
     private String originalTitle;
 
     @SerializedName("original_language")
+    @ColumnInfo(name = "original_language")
     private String originalLanguage;
 
     @SerializedName("title")
     private String title;
 
     @SerializedName("backdrop_path")
+    @ColumnInfo(name = "backdrop_path")
     private String backdropPath;
 
     @SerializedName("popularity")
     private Double popularity;
 
     @SerializedName("vote_count")
+    @ColumnInfo(name = "vote_count")
     private Integer voteCount;
 
     @SerializedName("video")
     private Boolean video;
 
     @SerializedName("vote_average")
+    @ColumnInfo(name = "vote_average")
     private Double voteAverage;
 
     public String getPosterPath() {

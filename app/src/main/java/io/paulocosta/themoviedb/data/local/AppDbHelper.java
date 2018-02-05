@@ -1,6 +1,7 @@
 package io.paulocosta.themoviedb.data.local;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,7 +23,7 @@ public class AppDbHelper implements DbHelper {
 
     @Override
     public Single<List<Movie>> getDBMovies() {
-        return null;
+        return Single.fromCallable(() -> appDatabase.getMovieDao().getAllMovies());
     }
 
     @Override

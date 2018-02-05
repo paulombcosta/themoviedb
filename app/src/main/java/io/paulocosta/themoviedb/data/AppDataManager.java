@@ -41,7 +41,7 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Single<List<Movie>> getDBMovies() {
-        return null;
+        return dbHelper.getDBMovies();
     }
 
     @Override

@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import dagger.android.AndroidInjection;
-import io.paulocosta.themoviedb.utils.NetworkUtils;
 
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel>
@@ -31,10 +30,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         viewDataBinding.executePendingBindings();
     }
 
-    public boolean isNetworkConnected() {
-        return NetworkUtils.isNetworkConnected(getApplicationContext());
-    }
-
 
     public T getViewDataBinding() {
         return viewDataBinding;
@@ -44,9 +39,6 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
 
     public abstract int getBindingVariable();
 
-    /**
-     * @return layout resource id
-     */
     public abstract
     @LayoutRes
     int getLayoutId();

@@ -40,8 +40,9 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
     public OnMoreListener getOnMoreLister() {
         return (overallItemsCount, itemsBeforeMore, maxLastVisiblePosition) -> {
+            int page = currentPage.getValue();
             if (overallItemsCount > 0) {
-                currentPage.setValue(currentPage.getValue() + 1);
+                currentPage.setValue(page + 1);
                 fetchMovies();
             }
         };
@@ -67,7 +68,22 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
     Consumer<Throwable> handleError() {
         return throwable -> {
             setIsLoading(false);
+            fetchLocalMovies();
         };
+    }
+
+    void fetchLocalMovies() {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager().getDBMovies()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(movies -> {
+                    setIsLoading(false);
+                    clearData();
+                    currentPage.setValue(1);
+                    this.movieListLiveData.setValue(movies);
+                })
+        );
     }
 
     public void fetchMovies() {
