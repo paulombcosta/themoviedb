@@ -48,7 +48,7 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
     public void fetchMoviesAndGenres() {
         getCompositeDisposable().add(getDataManager()
                 .fetchAndInsertGenres()
-                .flatMap(b -> getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
+                .flatMap(b -> getDataManager().fetchAndInsertMovies(currentPage.getValue()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleMovies(), handleError())

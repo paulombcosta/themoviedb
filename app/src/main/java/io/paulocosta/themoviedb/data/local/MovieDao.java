@@ -16,7 +16,7 @@ import io.paulocosta.themoviedb.data.model.db.Movie;
 @Dao
 public interface MovieDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<Movie> genres);
 
     @Query("SELECT * FROM MOVIES")

@@ -30,6 +30,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Single<ApiResponse> discoverUpcomingMovies(int page) {
+        return apiHelper.discoverUpcomingMovies(page);
+    }
+
+    @Override
     public Single<ApiResponse> searchMovies(int page, String searchQuery) {
         return apiHelper.searchMovies(page, searchQuery);
     }
@@ -52,6 +57,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<Boolean> insertMovies(List<Movie> movies) {
         return dbHelper.insertMovies(movies);
+    }
+
+    @Override
+    public Single<List<Genre>> getDBMovieGenres(int movieId) {
+        return dbHelper.getDBMovieGenres(movieId);
     }
 
     @Override

@@ -15,10 +15,10 @@ import io.paulocosta.themoviedb.data.model.db.Movie;
         foreignKeys = {
                 @ForeignKey(entity = Movie.class,
                         parentColumns = "id",
-                        childColumns = "genreId"),
+                        childColumns = "movieId"),
                 @ForeignKey(entity = Genre.class,
                         parentColumns = "id",
-                        childColumns = "movieId")
+                        childColumns = "genreId")
         })
 public class MovieGenreJoin {
 

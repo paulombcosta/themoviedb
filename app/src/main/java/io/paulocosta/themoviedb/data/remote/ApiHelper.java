@@ -11,6 +11,8 @@ public interface ApiHelper {
 
     Single<ApiResponse> fetchUpcomingMovies(int page);
 
+    Single<ApiResponse> discoverUpcomingMovies(int page);
+
     Single<ApiResponse> searchMovies(int page, String searchQuery);
 
     Single<List<Genre>> fetchGenres();

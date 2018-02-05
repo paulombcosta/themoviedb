@@ -1,5 +1,8 @@
 package io.paulocosta.themoviedb.data.remote;
 
+import android.text.format.DateFormat;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,10 +31,18 @@ public class AppApiHelper implements ApiHelper {
         return upcomingService.searchMovies(page, searchQuery);
     }
 
+    public Single<ApiResponse> discoverUpcomingMovies(int page) {
+        return upcomingService.discoverUpcomingMovies(page, getCurrentDateFormatted());
+    }
+
     @Override
     public Single<List<Genre>> fetchGenres() {
         return upcomingService.getMovieGenres()
                 .map(r -> r.getGenres());
+    }
+
+    private String getCurrentDateFormatted() {
+        return DateFormat.format("yyyy-MM-dd", new Date()).toString();
     }
 
 }

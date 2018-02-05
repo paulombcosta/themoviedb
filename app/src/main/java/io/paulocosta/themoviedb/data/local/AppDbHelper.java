@@ -50,7 +50,13 @@ public class AppDbHelper implements DbHelper {
                     }
                     return true;
                 })
-                .single(true);
+                .toList()
+                .flatMap(l -> Observable.just(true).single(true));
+    }
+
+    @Override
+    public Single<List<Genre>> getDBMovieGenres(int movieId) {
+        return Single.fromCallable(() -> appDatabase.getMovieGenreJoinDao().getMovieGenres(movieId));
     }
 
 }

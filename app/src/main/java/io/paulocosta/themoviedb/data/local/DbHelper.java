@@ -16,5 +16,7 @@ public interface DbHelper {
 
     Single<Boolean> insertMovies(List<Movie> movies);
 
+    Single<List<Genre>> getDBMovieGenres(int movieId);
+
 
 }

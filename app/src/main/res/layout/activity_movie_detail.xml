@@ -21,8 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--app:contentScrim="?colorPrimary"-->
-            <!--app:titleEnabled="true"-->
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
@@ -89,33 +87,6 @@
                         android:layout_marginLeft="@dimen/movie_detail_content_margin"
                         android:layout_toRightOf="@id/original_title_label" />
 
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                        <!--android:id="@+id/original_language_label"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/original_title_label"-->
-                        <!--android:layout_marginTop="@dimen/movie_detail_label_margin"-->
-                        <!--android:text="@string/movie_original_language"-->
-                        <!--android:textStyle="bold" />-->
-
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                        <!--android:id="@+id/original_language_content"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/original_title_label"-->
-                        <!--android:layout_marginLeft="@dimen/movie_detail_content_margin"-->
-                        <!--android:layout_marginTop="@dimen/movie_detail_label_margin"-->
-                        <!--android:layout_toRightOf="@id/original_language_label" />-->
-
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                        <!--android:id="@+id/adult_label"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/original_language_label"-->
-                        <!--android:layout_marginTop="@dimen/movie_detail_label_margin"-->
-                        <!--android:text="@string/movie_adult"-->
-                        <!--android:textStyle="bold" />-->
-
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/release_date_label"
@@ -135,28 +106,6 @@
                         android:layout_marginTop="@dimen/movie_detail_label_margin"
                         android:layout_toRightOf="@id/release_date_label" />
 
-                    <!--<android.support.v7.widget.AppCompatTextView-->
-                        <!--android:id="@+id/rating_label"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/release_date_label"-->
-                        <!--android:layout_marginTop="@dimen/movie_detail_label_margin"-->
-                        <!--android:text="@string/movie_rating"-->
-                        <!--android:textStyle="bold" />-->
-
-                    <!--<android.support.v7.widget.AppCompatRatingBar-->
-                        <!--android:id="@+id/rating_content"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/release_date_label"-->
-                        <!--android:layout_marginLeft="@dimen/movie_detail_content_margin"-->
-                        <!--android:layout_marginTop="@dimen/movie_detail_rating_content_margin"-->
-                        <!--android:layout_toRightOf="@id/rating_label"-->
-                        <!--android:isIndicator="true"-->
-                        <!--android:scaleX="0.5"-->
-                        <!--android:scaleY="0.5"-->
-                        <!--android:transformPivotX="0dp"-->
-                        <!--android:transformPivotY="0dp" />-->
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/overview_label"
@@ -164,43 +113,40 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/release_date_content"
                         android:layout_marginTop="@dimen/movie_detail_label_margin"
-                        android:text="@{viewModel.overview}"
                         android:textStyle="bold" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/overview_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{viewModel.overview}"
                         android:layout_below="@id/release_date_content"
                         android:layout_marginLeft="@dimen/movie_detail_content_margin"
                         android:layout_marginTop="@dimen/movie_detail_label_margin"
                         android:layout_toRightOf="@id/overview_label" />
 
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/genre_label"
+                        android:text="@string/genres_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/overview_content"
+                        android:layout_marginTop="@dimen/movie_detail_label_margin"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/genre_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/genre_label"
+                        android:layout_marginStart="@dimen/movie_detail_content_margin"
+                        android:layout_marginTop="@dimen/movie_detail_label_margin"
+                        android:text="@{viewModel.genres}" />
+
+
+
                 </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/movie_not_found_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    tools:ignore="UseCompoundDrawables">
-
-                    <!--<ImageView-->
-                        <!--android:layout_width="62dp"-->
-                        <!--android:layout_height="62dp"-->
-                        <!--android:contentDescription="@string/app_name"-->
-                        <!--android:src="@drawable/ic_search_white_48dp"-->
-                        <!--android:tint="?textColorPrimary" />-->
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/movie_not_found_text"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:text="@string/movie_not_found" />-->
-
-                </LinearLayout>
 
             </RelativeLayout>
 
