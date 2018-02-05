@@ -2,16 +2,21 @@ package io.paulocosta.themoviedb.ui.movie;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
+import android.util.Log;
 
 import com.malinskiy.superrecyclerview.OnMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.paulocosta.themoviedb.data.DataManager;
+import io.paulocosta.themoviedb.data.model.api.ApiResponse;
 import io.paulocosta.themoviedb.data.model.db.Movie;
 import io.paulocosta.themoviedb.ui.base.BaseViewModel;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -23,12 +28,14 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
     private final MutableLiveData<Integer> currentPage;
 
+    private static final int SEARCH_DEBOUNCE_MILLIS = 300;
+
     public MovieViewModel(DataManager dataManager) {
         super(dataManager);
         movieListLiveData = new MutableLiveData<>();
         currentPage = new MutableLiveData<>();
         currentPage.setValue(1);
-        fetchMovies();
+        fetchMoviesAndGenres();
     }
 
     public OnMoreListener getOnMoreLister() {
@@ -38,23 +45,82 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
         };
     }
 
-    public void fetchMovies() {
-        getDataManager().getUpcomingMovies(currentPage.getValue())
+    public void fetchMoviesAndGenres() {
+        getCompositeDisposable().add(getDataManager()
+                .fetchAndInsertGenres()
+                .flatMap(b -> getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        response -> {
-                            if (response != null) {
-                                List<Movie> currentMovies = movieListLiveData.getValue();
-                                if (currentMovies == null) {
-                                    currentMovies = new ArrayList<>();
-                                }
-                                currentMovies.addAll(response.getResults());
-                                movieListLiveData.setValue(currentMovies);
-                            }
-                        },
-                        e -> {
-                        });
+                .subscribe(handleMovies(), handleError())
+        );
+//        getDataManager().fetchAndInsertGenres()
+//                .concatWith(getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
+        //Observable.concat(getDataManager().fetchAndInsertGenres(), getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
+    }
+
+    Consumer<List<Movie>> handleMovies() {
+        return movies -> {
+            setIsLoading(false);
+            updateMovieLiveData(movies);
+        };
+    }
+
+    Consumer<Throwable> handleError() {
+        return throwable -> {
+            Log.e("","HAHAHAHA",throwable);
+            setIsLoading(false);
+        };
+    }
+
+    public void fetchMovies() {
+        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager().fetchUpcomingMovies(currentPage.getValue())
+                .map(ApiResponse::getResults)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleMovies(), handleError())
+        );
+    }
+
+    void updateMovieLiveData(List<Movie> movies) {
+        List<Movie> updated = new ArrayList<>();
+        List<Movie> current = movieListLiveData.getValue();
+        if (current != null) {
+            updated.addAll(current);
+        }
+        updated.addAll(movies);
+        movieListLiveData.setValue(updated);
+    }
+
+    private void searchMovies(String query) {
+        setIsLoading(true);
+        getDataManager().searchMovies(currentPage.getValue(), query)
+                .map(ApiResponse::getResults)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(handleMovies(), handleError());
+    }
+
+    void clearData() {
+        currentPage.setValue(1);
+        movieListLiveData.setValue(new ArrayList<>());
+    }
+
+    void onSearch(final Observable<String> searchObs) {
+        searchObs
+                .debounce(SEARCH_DEBOUNCE_MILLIS, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(search -> {
+                    if (search.isEmpty()) {
+//                        clearData();
+//                        fetchMovies();
+                    } else {
+//                        clearData();
+//                        searchMovies(search);
+                    }
+                });
     }
 
     public MutableLiveData<List<Movie>> getMovieListLiveData() {

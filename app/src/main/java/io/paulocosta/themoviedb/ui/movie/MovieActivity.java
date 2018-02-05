@@ -2,6 +2,9 @@ package io.paulocosta.themoviedb.ui.movie;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -9,6 +12,8 @@ import io.paulocosta.themoviedb.BR;
 import io.paulocosta.themoviedb.R;
 import io.paulocosta.themoviedb.databinding.ActivityMovieBinding;
 import io.paulocosta.themoviedb.ui.base.BaseActivity;
+import io.paulocosta.themoviedb.utils.RxSearchObservable;
+import io.reactivex.Observable;
 
 public class MovieActivity extends BaseActivity<ActivityMovieBinding, MovieViewModel> {
 
@@ -29,6 +34,23 @@ public class MovieActivity extends BaseActivity<ActivityMovieBinding, MovieViewM
         binding = getViewDataBinding();
         setUp();
         subscribeToLiveData();
+        setSupportActionBar(binding.toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.movies_menu, menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        Observable<String> searchObservable = RxSearchObservable.fromView(searchView);
+        viewModel.onSearch(searchObservable);
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

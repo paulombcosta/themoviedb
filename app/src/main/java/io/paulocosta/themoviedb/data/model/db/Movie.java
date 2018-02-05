@@ -11,12 +11,13 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
+@Entity(tableName = "movies")
 public class Movie implements Serializable, Parcelable {
 
     public Movie() {}
 
     public Movie(Parcel in) {
+        id = in.readInt();
         originalTitle = in.readString();
         posterPath = in.readString();
         overview = in.readString();
@@ -186,6 +187,7 @@ public class Movie implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(originalTitle);
         parcel.writeString(posterPath);
         parcel.writeString(overview);

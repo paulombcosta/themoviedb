@@ -23,7 +23,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
-                app:title="@string/app_name"
+                app:title="Upcoming Movies"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -42,8 +42,15 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_movie_view"
                 app:recyclerPadding="16dp"
-                app:adapter="@{viewModel.moviesObservableArrayList}"
-                >
+                app:adapter="@{viewModel.moviesObservableArrayList}">
+
+            <android.support.v4.widget.ContentLoadingProgressBar
+                android:id="@+id/address_looking_up"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"/>
 
             </com.malinskiy.superrecyclerview.SuperRecyclerView>
 

@@ -19,6 +19,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public MovieAdapter(List<Movie> movieList) {
         this.movieList = movieList;
+        setHasStableIds(true);
     }
 
     @Override
@@ -47,6 +48,16 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public int getItemCount() {
         return movieList.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public class MoviesViewHolder extends BaseViewHolder implements MovieItemViewModel.MovieItemClickListener {

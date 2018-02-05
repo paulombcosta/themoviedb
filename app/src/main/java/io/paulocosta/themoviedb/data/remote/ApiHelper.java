@@ -1,14 +1,18 @@
 package io.paulocosta.themoviedb.data.remote;
 
+import java.util.List;
+
 import io.paulocosta.themoviedb.data.model.api.ApiResponse;
+import io.paulocosta.themoviedb.data.model.db.Genre;
 import io.reactivex.Single;
 
-/**
- * Created by paulocosta on 02/02/18.
- */
 
 public interface ApiHelper {
 
-    Single<ApiResponse> getUpcomingMovies(int page);
+    Single<ApiResponse> fetchUpcomingMovies(int page);
+
+    Single<ApiResponse> searchMovies(int page, String searchQuery);
+
+    Single<List<Genre>> fetchGenres();
 
 }
