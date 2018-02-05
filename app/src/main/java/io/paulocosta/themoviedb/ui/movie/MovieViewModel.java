@@ -40,8 +40,10 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
     public OnMoreListener getOnMoreLister() {
         return (overallItemsCount, itemsBeforeMore, maxLastVisiblePosition) -> {
-            currentPage.setValue(currentPage.getValue() + 1);
-            fetchMovies();
+            if (overallItemsCount > 0) {
+                currentPage.setValue(currentPage.getValue() + 1);
+                fetchMovies();
+            }
         };
     }
 
@@ -53,9 +55,6 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(handleMovies(), handleError())
         );
-//        getDataManager().fetchAndInsertGenres()
-//                .concatWith(getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
-        //Observable.concat(getDataManager().fetchAndInsertGenres(), getDataManager().fetchAndInsertMovies(currentPage.getValue() + 1))
     }
 
     Consumer<List<Movie>> handleMovies() {
@@ -67,7 +66,6 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
 
     Consumer<Throwable> handleError() {
         return throwable -> {
-            Log.e("","HAHAHAHA",throwable);
             setIsLoading(false);
         };
     }
@@ -106,6 +104,11 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
         movieListLiveData.setValue(new ArrayList<>());
     }
 
+    void onSearchClose() {
+        clearData();
+        fetchMovies();
+    }
+
     void onSearch(final Observable<String> searchObs) {
         searchObs
                 .debounce(SEARCH_DEBOUNCE_MILLIS, TimeUnit.MILLISECONDS)
@@ -114,11 +117,11 @@ public class MovieViewModel extends BaseViewModel<MovieNavigator> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(search -> {
                     if (search.isEmpty()) {
-//                        clearData();
-//                        fetchMovies();
+                        clearData();
+                        fetchMovies();
                     } else {
-//                        clearData();
-//                        searchMovies(search);
+                        clearData();
+                        searchMovies(search);
                     }
                 });
     }

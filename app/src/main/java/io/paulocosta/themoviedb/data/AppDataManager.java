@@ -30,11 +30,6 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<ApiResponse> discoverUpcomingMovies(int page) {
-        return apiHelper.discoverUpcomingMovies(page);
-    }
-
-    @Override
     public Single<ApiResponse> searchMovies(int page, String searchQuery) {
         return apiHelper.searchMovies(page, searchQuery);
     }

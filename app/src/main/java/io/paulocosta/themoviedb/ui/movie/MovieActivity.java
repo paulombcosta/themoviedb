@@ -47,6 +47,12 @@ public class MovieActivity extends BaseActivity<ActivityMovieBinding, MovieViewM
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) searchItem.getActionView();
 
+        searchView.setOnCloseListener(() -> {
+            viewModel.onSearchClose();
+            searchItem.collapseActionView();
+            return false;
+        });
+
         Observable<String> searchObservable = RxSearchObservable.fromView(searchView);
         viewModel.onSearch(searchObservable);
 
