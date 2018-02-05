@@ -1,4 +1,4 @@
-# Movie Database App
+# Movie DB App
 
 This is a simple android project that uses the [Movie Database API](https://www.themoviedb.org/)
 to list and search upcoming movies.
@@ -10,9 +10,12 @@ to list and search upcoming movies.
 
 ## Build
 
-To build run ```./gradlew assembleRelease on the command line```
+To build on the terminal run ```./gradlew assembleDebug on the command line```
 You must also the environment variable ```TMD_API_KEY``` containing
 the API key for the service.
+
+You can also replace the API key directly on the ```Endpoint.java``` class.
+Just replace the field API_KEY with yours.
 
 ## Architecture and Frameworks
 
