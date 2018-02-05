@@ -23,7 +23,8 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<ApiResponse> fetchUpcomingMovies(int page) {
-        return upcomingService.getUpcomingMovies(page);
+        //return upcomingService.getUpcomingMovies(page);
+        return upcomingService.discoverUpcomingMovies(page, getCurrentDateFormatted());
     }
 
     @Override

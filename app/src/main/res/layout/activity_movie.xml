@@ -34,7 +34,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <com.malinskiy.superrecyclerview.SuperRecyclerView
                 android:id="@+id/movieRecyclerView"
@@ -42,6 +43,7 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_movie_view"
                 app:recyclerPadding="16dp"
+                android:paddingTop="50dp"
                 app:adapter="@{viewModel.moviesObservableArrayList}">
 
             <android.support.v4.widget.ContentLoadingProgressBar

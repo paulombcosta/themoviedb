@@ -9,7 +9,7 @@ import retrofit2.http.Query;
 
 public interface UpcomingService {
 
-    @GET("/3/discover/movie?sort_by=release_date.asc")
+    @GET("/3/discover/movie?")
     Single<ApiResponse> discoverUpcomingMovies(@Query("page") int page,
                                               @Query("release_date.gte") String dateGTE);
 
