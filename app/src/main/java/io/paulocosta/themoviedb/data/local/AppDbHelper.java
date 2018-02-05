@@ -1,7 +1,6 @@
 package io.paulocosta.themoviedb.data.local;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

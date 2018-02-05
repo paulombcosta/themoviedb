@@ -1,7 +1,6 @@
 package io.paulocosta.themoviedb.ui.movie.detail;
 
 import android.databinding.ObservableField;
-import android.util.Log;
 
 import io.paulocosta.themoviedb.data.DataManager;
 import io.paulocosta.themoviedb.data.model.db.Genre;
@@ -49,7 +48,5 @@ public class MovieDetailViewModel extends BaseViewModel {
         releaseDate.set(movie.getReleaseDate());
         fetchMovieGenres(movie.getId());
     }
-
-    // name, poster, genre, overview release date
 
 }

@@ -62,9 +62,7 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<Boolean> fetchAndInsertGenres() {
         return apiHelper.fetchGenres()
-                .flatMap(genres -> {
-                    return dbHelper.insertGenres(genres);
-                });
+                .flatMap(genres -> dbHelper.insertGenres(genres));
     }
 
     @Override

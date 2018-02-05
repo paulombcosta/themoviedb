@@ -4,9 +4,6 @@ import java.util.List;
 
 import io.paulocosta.themoviedb.data.model.db.Genre;
 
-/**
- * Created by paulocosta on 04/02/18.
- */
 
 public class GenreApiResponse {
 

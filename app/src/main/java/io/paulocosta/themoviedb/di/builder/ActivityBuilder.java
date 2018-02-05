@@ -7,9 +7,6 @@ import io.paulocosta.themoviedb.ui.movie.MovieActivityModule;
 import io.paulocosta.themoviedb.ui.movie.detail.MovieDetailActivity;
 import io.paulocosta.themoviedb.ui.movie.detail.MovieDetailModule;
 
-/**
- * Created by paulocosta on 01/02/18.
- */
 
 @Module
 public abstract class ActivityBuilder {

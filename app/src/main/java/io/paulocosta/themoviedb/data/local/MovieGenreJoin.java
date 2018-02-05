@@ -6,10 +6,6 @@ import android.arch.persistence.room.ForeignKey;
 import io.paulocosta.themoviedb.data.model.db.Genre;
 import io.paulocosta.themoviedb.data.model.db.Movie;
 
-/**
- * Created by paulocosta on 04/02/18.
- */
-
 @Entity(tableName = "movie_genre_join",
         primaryKeys = {"movieId", "genreId"},
         foreignKeys = {

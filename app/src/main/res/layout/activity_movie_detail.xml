@@ -144,8 +144,6 @@
                         android:layout_marginTop="@dimen/movie_detail_label_margin"
                         android:text="@{viewModel.genres}" />
 
-
-
                 </RelativeLayout>
 
             </RelativeLayout>

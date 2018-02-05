@@ -2,7 +2,6 @@ package io.paulocosta.themoviedb.ui.movie;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableArrayList;
-import android.util.Log;
 
 import com.malinskiy.superrecyclerview.OnMoreListener;
 
